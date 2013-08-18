@@ -49,7 +49,7 @@ exports.pitch = function(val) {
 };
 
 exports.roll = function(val) {
-  if(!flying) return false;
+  // if(!flying) return false;
 
   if(val >= -10 && val <= 10) {
     console.log('left', 0)
@@ -81,17 +81,17 @@ exports.yaw = function(val) {
   var dYaw = val - lastYaw;
   var damp = 0.5;
   if (dYaw > 0.2) {
-    var right = dYaw*damp;
-    console.log('right', right)
-    client.right(left);
+    var clockwise = dYaw*damp;
+    console.log('clockwise', clockwise)
+    client.clockwise(clockwise);
     lastYaw = val;
   } else if (dYaw < -0.2) {
-    var left = dYaw*damp;
-    console.log('left', left)
-    client.left(left);
+    var counterClockwise = dYaw*damp;
+    console.log('counterClockwise', counterClockwise)
+    client.counterClockwise(counterClockwise);
     lastYaw = val;
   } else {
-    client.left(0);
+    client.counterClockwise(0);
   }
 
 }
