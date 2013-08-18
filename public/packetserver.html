@@ -10,6 +10,7 @@
       <div style="font-size: 128px; color: red; border: solid thin red; cursor: pointer; text-align: center;" id="land">LAND</div>
       <input type="button" id="takeoff" value="TAKEOFF"/>
     </table>
+    <canvas id="c"></canvas>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io.connect('http://localhost');
@@ -23,6 +24,7 @@
 
     <script src="lib/OculusBridge.min.js"></script>
     <script src="packetgenerator.js"></script>
+    <script src="image.js"></script>
   </body>
 </html>
 

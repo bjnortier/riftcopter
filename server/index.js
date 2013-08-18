@@ -36,7 +36,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   drone.onImage(function(png) {
-    socket.emit('image', {data: png});
+    socket.emit('image', {image: png});
   });
 });
 
