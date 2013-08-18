@@ -46,9 +46,10 @@ exports.pitch = function(val) {
     console.log('front', front)
     client.front(front);
   }
-};
 
-var forward = function(val) {
-  client.front();
-  console.log('forward: ' + val);
+  if(val > 10) {
+    var back = ((val + 10) / 80) * 0.1;
+    console.log('back', back)
+    client.back(back);
+  }
 };
