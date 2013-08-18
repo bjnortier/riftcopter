@@ -21,11 +21,15 @@ exports.handle = function(data) {
 
   if (data.orientation) {
     var orientation = data.orientation;
-    if (orientation.pitch) {
-      drone.pitch(orientation.pitch);
-    }
-    if (orientation.yaw) {
-      drone.yaw(orientation.yaw);
+    
+    // if (orientation.pitch) {
+    //   drone.pitch(orientation.pitch);
+    // }
+    // if (orientation.yaw) {
+    //   drone.yaw(orientation.yaw);
+    // }
+    if(orientation.roll) {
+      drone.roll(orientation.roll);
     }
   }
 };

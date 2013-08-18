@@ -40,12 +40,40 @@ exports.pitch = function(val) {
     console.log('front', front)
     client.front(front);
   }
+
+  if(val > 10) {
+    var back = ((val + 10) / 80) * 0.1;
+    console.log('back', back)
+    client.back(back);
+  }
+};
+
+exports.roll = function(val) {
+  if(!flying) return false;
+
+  if(val >= -10 && val <= 10) {
+    console.log('left', 0)
+    client.left(0);
+    return;
+  }
+
+  if(val < -10) {
+    var left = ((val - 10) / -80) * 0.1;
+    console.log('left', left)
+    client.left(left);
+  }
+
+  if(val > 10) {
+    var right = ((val + 10) / 80) * 0.1;
+    console.log('right', right)
+    client.right(right);
+  }
 };
 
 var lastYaw;
 
 exports.yaw = function(val) {
-  // if(!flying) return false;
+  if(!flying) return false;
 
   if (!lastYaw) {
     lastYaw = val;
@@ -68,7 +96,3 @@ exports.yaw = function(val) {
 
 }
 
-var forward = function(val) {
-  client.front();
-  console.log('forward: ' + val);
-};
