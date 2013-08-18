@@ -2,14 +2,23 @@
 
 <html>
   <body>
+    <script src="lib/jquery-1.10.2.min.js"></script>
     <table>
       <tr><td>ROLL</td><td id="roll"></td></tr>
       <tr><td>PITCH</td><td id="pitch"></td></tr>
       <tr><td>YAW</td><td id="yaw"></td></tr>
+      <div style="font-size: 128px; color: red; border: solid thin red; cursor: pointer; text-align: center;" id="land">LAND</div>
+      <input type="button" id="takeoff" value="TAKEOFF"/>
     </table>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io.connect('http://localhost');
+      $('#takeoff').click(function() {
+        socket.emit('event', 'takeoff');
+      });
+      $('#land').click(function() {
+        socket.emit('event', 'land');
+      });
     </script>
 
     <script src="lib/OculusBridge.min.js"></script>
