@@ -3,6 +3,8 @@ var client  = arDrone.createClient();
 var flying = false;
 
 exports.initiate = function() {
+  if(flying) return;
+
   client.takeoff();
   flying = true;
 
@@ -10,9 +12,13 @@ exports.initiate = function() {
 };
 
 exports.land = function() {
+  if(!flying) return;
+  
   client.stop();
   client.land();
   flying = false;
 
   console.log('landing');
 };
+
+exports.tilt = function(tilt) {};
