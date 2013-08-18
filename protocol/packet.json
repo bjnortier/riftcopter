@@ -1,0 +1,7 @@
+JSON packet structure:
+
+{
+  "tilt": -90 to +90. negative is looking down,
+  "roll": -90 to +90. negative is a roll to the left,
+  "pan": -180 to +180. Negative is to the left,
+} 
