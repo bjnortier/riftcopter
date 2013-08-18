@@ -30,7 +30,13 @@ var io = require('socket.io').listen(app);
 io.set('log level', 1);
 io.sockets.on('connection', function (socket) {
   socket.emit('info', { state: 'connected' });
+
   socket.on('event', function (data) {
     inputHandler.handle(data);
   });
+
+  drone.onImage(function(png) {
+    socket.emit('image', {data: png});
+  });
 });
+

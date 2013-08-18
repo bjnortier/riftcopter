@@ -1,6 +1,24 @@
 var arDrone = require('ar-drone');
 var client  = arDrone.createClient();
+var pngStream = client.getPngStream();
+
 var flying = false;
+
+var imageListeners = [];
+
+exports.onImage = function(callback) {
+  imageListeners.push(callback);
+};
+
+var updateImage = function(png) {
+  for(var i = 0, length = imageListeners.length; i < length; i++) {
+    imageListeners[i](png);
+  }
+};
+
+pngStream
+  .on('error', console.log)
+  .on('data', updateImage);
 
 exports.ready = function() {
   return flying;
