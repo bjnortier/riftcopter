@@ -6,24 +6,18 @@ exports.ready = function() {
   return flying;
 };
 
-exports.initiate = function(callback) {
+exports.takeoff = function(callback) {
   if(flying) return;
 
   client.takeoff(function() {
-    client.up(0.5);
-    setTimeout(function() {
-      client.stop();
-      flying = true;
-
-      callback();
-    }, 1000);
+    flying = true;
   });
 
   console.log('taking off');
 };
 
+
 exports.land = function() {
-  if(!flying) return;
 
   client.stop();
   client.land();

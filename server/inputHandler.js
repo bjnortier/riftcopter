@@ -6,19 +6,20 @@ exports.init = function(ardrone) {
 
 
 exports.handle = function(data) {
+
   if(!drone || !data) return;
 
   if(data === 'takeoff') {
-    drone.initiate();
+    drone.takeoff();
     return;
   }
-  
-  if(!drone.ready()) return;
 
   if(data === 'land') {
     drone.land();
     return;
   }
+
+  if(!drone.ready()) return;
 
   if (data.orientation) {
     var orientation = data.orientation;
