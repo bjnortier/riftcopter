@@ -42,6 +42,32 @@ exports.pitch = function(val) {
   }
 };
 
+var lastYaw;
+
+exports.yaw = function(val) {
+  // if(!flying) return false;
+
+  if (!lastYaw) {
+    lastYaw = val;
+  }
+  var dYaw = val - lastYaw;
+  var damp = 0.5;
+  if (dYaw > 0.2) {
+    var right = dYaw*damp;
+    console.log('right', right)
+    client.right(left);
+    lastYaw = val;
+  } else if (dYaw < -0.2) {
+    var left = dYaw*damp;
+    console.log('left', left)
+    client.left(left);
+    lastYaw = val;
+  } else {
+    client.left(0);
+  }
+
+}
+
 var forward = function(val) {
   client.front();
   console.log('forward: ' + val);

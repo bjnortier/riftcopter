@@ -19,12 +19,13 @@ exports.handle = function(data) {
     return;
   }
 
-  if(!drone.ready()) return;
-
   if (data.orientation) {
     var orientation = data.orientation;
     if (orientation.pitch) {
       drone.pitch(orientation.pitch);
+    }
+    if (orientation.yaw) {
+      drone.yaw(orientation.yaw);
     }
   }
 };

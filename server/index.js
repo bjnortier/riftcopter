@@ -7,7 +7,7 @@ inputHandler.init(drone);
 var serveFile = function(path, res) {
   fs.readFile(__dirname + '/../public' + path, 'utf-8', function(err, data) {
     if (err) {
-      if (path !== '/favicon.ico') {
+      if (['/favicon.ico', '/lib/jquery-1.10.2.min.map'].indexOf(path) === -1) {
         console.error('404', path);
       }
       res.writeHead(404);
@@ -28,13 +28,9 @@ app.listen(8000);
 
 var io = require('socket.io').listen(app);
 io.set('log level', 1);
-
 io.sockets.on('connection', function (socket) {
-
   socket.emit('info', { state: 'connected' });
-
   socket.on('event', function (data) {
     inputHandler.handle(data);
   });
-
 });
