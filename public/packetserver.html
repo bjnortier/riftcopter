@@ -1,8 +1,19 @@
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io.connect('http://localhost');
-</script>
+<!DOCTYPE html>
 
-<script src="lib/OculusBridge.min.js"></script>
-<script src="packetgenerator.js"></script>
+<html>
+  <body>
+    <table>
+      <tr><td>ROLL</td><td id="roll"></td></tr>
+      <tr><td>PITCH</td><td id="pitch"></td></tr>
+      <tr><td>YAW</td><td id="yaw"></td></tr>
+    </table>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost');
+    </script>
+
+    <script src="lib/OculusBridge.min.js"></script>
+    <script src="packetgenerator.js"></script>
+  </body>
+</html>
 

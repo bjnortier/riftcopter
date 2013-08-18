@@ -34,10 +34,9 @@ io.sockets.on('connection', function (socket) {
 
   socket.emit('info', { state: 'connected' });
 
-  // socket.on('event', function (data) {
-  //   inputHandler.handle(data);
-  // });
-
   socket.on('event', function (data) {
-    console.log(data);  });
+    console.log(data);
+    inputHandler.handle(data);
+  });
+
 });
