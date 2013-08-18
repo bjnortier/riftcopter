@@ -7,7 +7,9 @@ inputHandler.init(drone);
 var serveFile = function(path, res) {
   fs.readFile(__dirname + '/../public' + path, 'utf-8', function(err, data) {
     if (err) {
-      console.error('404', path);
+      if (path !== '/favicon.ico') {
+        console.error('404', path);
+      }
       res.writeHead(404);
       res.end();  
     } else {
