@@ -54,41 +54,42 @@ exports.pitch = function(val) {
   }
 
   if(val < -10) {
-    var front = ((val - 10) / -80) * 0.1;
+    var front = ((val - 10) / -80) * 0.3;
     console.log('front', front)
     client.front(front);
   }
 
   if(val > 10) {
-    var back = ((val + 10) / 80) * 0.1;
+    var back = ((val + 10) / 80) * 0.3;
     console.log('back', back)
     client.back(back);
   }
 };
 
 exports.roll = function(val) {
-  // if(!flying) return false;
+  if(!flying) return false;
 
   if(val >= -10 && val <= 10) {
-    console.log('left', 0)
     client.left(0);
     return;
   }
 
   if(val < -10) {
-    var left = ((val - 10) / -80) * 0.1;
+    var left = ((val - 10) / -80) * 0.3;
     console.log('left', left)
     client.left(left);
   }
 
   if(val > 10) {
-    var right = ((val + 10) / 80) * 0.1;
+    var right = ((val + 10) / 80) * 0.3;
     console.log('right', right)
     client.right(right);
   }
 };
 
 var lastYaw;
+var lastOutputs = [0,0,0,0,0,0,0,0,0,0];
+var lastClockwise = 0;
 
 exports.yaw = function(val) {
   if(!flying) return false;
@@ -97,19 +98,36 @@ exports.yaw = function(val) {
     lastYaw = val;
   }
   var dYaw = val - lastYaw;
-  var damp = 0.5;
-  if (dYaw > 0.2) {
-    var clockwise = dYaw*damp;
-    console.log('clockwise', clockwise)
-    client.clockwise(clockwise);
-    lastYaw = val;
-  } else if (dYaw < -0.2) {
-    var counterClockwise = dYaw*damp;
-    console.log('counterClockwise', counterClockwise)
-    client.counterClockwise(counterClockwise);
-    lastYaw = val;
+  if ((val < -90) && (lastYaw > 90)) {
+    dYaw = 360 + dYaw;
+  } else if ((val > 90) && (lastYaw < -90)) {
+    dYaw = dYaw - 360;
+  }
+  
+  var clockwise = dYaw;
+  lastOutputs = [clockwise].concat(lastOutputs.slice(0, 9));
+  lastYaw = val;
+
+  var damp = 0.1;
+  var avg = lastOutputs.reduce(function(acc, x) {
+    return acc + x;
+  }, 0) / 10*damp;
+  if (Math.abs(avg) > 0.1) {
+
+    console.log('clockwise', avg);
+    if (avg > 0) {
+      client.clockwise(avg);
+      lastClockwise = avg;
+    } else {
+      client.counterClockwise(-avg);
+      lastClockwise = avg;
+    }
   } else {
-    client.counterClockwise(0);
+    if (lastClockwise !== 0) {
+      console.log('clockwise', 0);
+      client.clockwise('clockwise', 0);
+      lastClockwise = 0;
+    }
   }
 
 }
