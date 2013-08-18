@@ -1,4 +1,8 @@
 {
   "name": "riftcopter",
-  "version" : "0.1.0"
+  "version": "0.1.0",
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "ar-drone": "~0.1.0"
+  }
 }
