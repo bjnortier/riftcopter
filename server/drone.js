@@ -47,3 +47,25 @@ exports.pitch = function(val) {
     client.back(back);
   }
 };
+
+exports.roll = function(val) {
+  if(!flying) return false;
+
+  if(val >= -10 && val <= 10) {
+    console.log('left', 0)
+    client.left(0);
+    return;
+  }
+
+  if(val < -10) {
+    var left = ((val - 10) / -80) * 0.1;
+    console.log('left', left)
+    client.left(left);
+  }
+
+  if(val > 10) {
+    var right = ((val + 10) / 80) * 0.1;
+    console.log('right', right)
+    client.right(right);
+  }
+};
