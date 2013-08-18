@@ -36,12 +36,15 @@ exports.pitch = function(val) {
   if(!flying) return false;
 
   if(val >= -10 && val <= 10) {
-    forward(0);
+    console.log('front', 0)
+    client.front(0);
     return;
   }
 
   if(val < -10) {
-    forward(((val - 10) / -80) * 0.1);
+    var front = ((val - 10) / -80) * 0.1;
+    console.log('front', front)
+    client.front(front);
   }
 };
 

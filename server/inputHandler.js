@@ -12,17 +12,18 @@ exports.handle = function(data) {
     drone.initiate();
     return;
   }
+  
+  if(!drone.ready()) return;
 
   if(data === 'land') {
     drone.land();
     return;
   }
 
-  if(!drone.ready()) return;
-
-  if(data.pitch || data.roll || data.pan) {
-    drone.pitch(data.pitch);
-    drone.roll(data.roll);
-    drone.pan(data.pan);
+  if (data.orientation) {
+    var orientation = data.orientation;
+    if (orientation.pitch) {
+      drone.pitch(orientation.pitch);
+    }
   }
 };
