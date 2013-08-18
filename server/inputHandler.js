@@ -18,8 +18,10 @@ exports.handle = function(data) {
     return;
   }
 
-  if(data.tilt || data.roll || data.pan) {
-    drone.tilt(data.tilt);
+  if(!drone.ready()) return;
+
+  if(data.pitch || data.roll || data.pan) {
+    drone.pitch(data.pitch);
     drone.roll(data.roll);
     drone.pan(data.pan);
   }
