@@ -4,7 +4,6 @@ exports.init = function(ardrone) {
   drone = ardrone;
 };
 
-
 exports.handle = function(data) {
   if(!drone) return;
 
