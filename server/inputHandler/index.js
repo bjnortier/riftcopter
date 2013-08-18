@@ -8,12 +8,12 @@ exports.init = function(ardrone) {
 exports.handle = function(data) {
   if(!drone) return;
 
-  if(data.takeoff) {
+  if(data === 'takeoff') {
     drone.initiate();
     return;
   }
 
-  if(data.land) {
+  if(data === 'land') {
     drone.land();
     return;
   }
